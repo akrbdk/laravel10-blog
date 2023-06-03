@@ -45,11 +45,7 @@ class PostResource extends Resource
                         ->required(),
                     Forms\Components\Toggle::make('active')
                         ->required(),
-                    Forms\Components\DateTimePicker::make('published_at'),
-                    Forms\Components\Select::make('categories')
-                        ->multiple()
-                        ->relationship('categories', 'title')
-                        ->required(),
+                    Forms\Components\DateTimePicker::make('published_at')
                 ])->columnSpan(8),
                 Forms\Components\Card::make()
                 ->schema([
