@@ -16,6 +16,4 @@
 
     </section>
 
-    <x-sidebar/>
-
 </x-app-layout>

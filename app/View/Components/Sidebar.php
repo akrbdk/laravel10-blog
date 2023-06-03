@@ -8,7 +8,7 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\DB;
 use Illuminate\View\Component;
 
-class AppLayout extends Component
+class Sidebar extends Component
 {
     /**
      * Create a new component instance.
@@ -30,6 +30,6 @@ class AppLayout extends Component
             ->orderByDesc('total')
             ->get();
 
-        return view('layouts.app', compact('categories'));
+        return view('components.sidebar', compact('categories'));
     }
 }

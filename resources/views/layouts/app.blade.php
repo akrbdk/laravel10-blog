@@ -40,22 +40,31 @@
 <!-- Topic Nav -->
 <nav class="w-full py-4 border-t border-b bg-gray-100" x-data="{ open: false }">
     <div class="block sm:hidden">
-        <a
-            href="#"
+        <a href="#"
             class="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
-            @click="open = !open"
-        >
+            @click="open = !open">
             Topics <i :class="open ? 'fa-chevron-down': 'fa-chevron-up'" class="fas ml-2"></i>
         </a>
     </div>
     <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
         <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Technology</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Automotive</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Finance</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Politics</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Culture</a>
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">Sports</a>
+
+            <a href="{{ route('home') }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                Home
+            </a>
+
+            @if(isset($categories))
+                @foreach($categories as $category)
+                    <a href="{{ route('by-category', $category) }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{ request('category')->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                        {{ $category->title }}
+                    </a>
+                @endforeach
+            @endif
+
+            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+                About us
+            </a>
+
         </div>
     </div>
 </nav>
@@ -65,16 +74,31 @@
 
     {{ $slot }}
 
+    <x-sidebar/>
+
 </div>
 
 <footer class="w-full border-t bg-white pb-12">
 
     <div class="w-full container mx-auto flex flex-col items-center">
         <div class="flex flex-col md:flex-row text-center md:text-left md:justify-between py-6">
-            <a href="#" class="uppercase px-3">About Us</a>
-            <a href="#" class="uppercase px-3">Privacy Policy</a>
-            <a href="#" class="uppercase px-3">Terms & Conditions</a>
-            <a href="#" class="uppercase px-3">Contact Us</a>
+
+            <a href="{{ route('home') }}" class="uppercase px-3">
+                Home
+            </a>
+
+            @if(isset($categories))
+                @foreach($categories as $category)
+                    <a href="{{ route('by-category', $category) }}" class="uppercase px-3 {{ request('category')->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                        {{ $category->title }}
+                    </a>
+                @endforeach
+            @endif
+
+            <a href="#" class="uppercase px-3">
+                About us
+            </a>
+
         </div>
         <div class="uppercase pb-6">&copy; myblog.com</div>
     </div>

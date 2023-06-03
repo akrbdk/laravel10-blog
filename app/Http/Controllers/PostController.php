@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Post;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
@@ -66,6 +67,19 @@ class PostController extends Controller
             ->first();
 
         return view('post.view', compact('post', 'prev', 'next'));
+    }
+
+    public function byCategory(Category $category)
+    {
+        $posts = Post::query()
+            ->join('category_post', 'posts.id', '=', 'category_post.post_id')
+            ->where('active', true)
+            ->where('category_post.category_id', '=', $category->id)
+            ->whereDate('published_at', '<=', Carbon::now())
+            ->orderBy('published_at', 'desc')
+            ->paginate(10);
+
+        return view('home', compact('posts'));
     }
 
     /**
