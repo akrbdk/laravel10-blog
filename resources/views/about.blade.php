@@ -1,4 +1,4 @@
-<x-app-layout>
+<x-app-layout meta-title="About us page" meta-description="About us page description">
 
     <section class="w-full md:w-2/3 flex flex-col items-center px-3">
         <article class="w-full flex flex-col shadow my-4">
