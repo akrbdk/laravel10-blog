@@ -55,13 +55,13 @@
 
             @if(isset($categories))
                 @foreach($categories as $category)
-                    <a href="{{ route('by-category', $category) }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{ request('category')->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('by-category', $category) }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
                         {{ $category->title }}
                     </a>
                 @endforeach
             @endif
 
-            <a href="#" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">
+            <a href="{{ route('about') }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">
                 About us
             </a>
 
@@ -89,13 +89,13 @@
 
             @if(isset($categories))
                 @foreach($categories as $category)
-                    <a href="{{ route('by-category', $category) }}" class="uppercase px-3 {{ request('category')->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('by-category', $category) }}" class="uppercase px-3 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
                         {{ $category->title }}
                     </a>
                 @endforeach
             @endif
 
-            <a href="#" class="uppercase px-3">
+            <a href="{{ route('about') }}" class="uppercase px-3">
                 About us
             </a>
 
