@@ -11,7 +11,7 @@ class PostView extends Model
 
     protected $fillable = [
         'ip_address',
-        'iser_agent',
+        'user_agent',
         'post_id',
         'user_id'
     ];

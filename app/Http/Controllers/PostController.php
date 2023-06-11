@@ -71,7 +71,7 @@ class PostController extends Controller
 
         PostView::create([
             'ip_address' => $request->ip(),
-            'iser_agent' => $request->userAgent(),
+            'user_agent' => $request->userAgent(),
             'post_id' => $post->id,
             'user_id' => $user?->id
         ]);
