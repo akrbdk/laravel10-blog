@@ -72,9 +72,6 @@ class PostController extends Controller
                 ->get();
         }
 
-
-        //Show recent categories with their latest posts
-
         return view('home', compact('latestPost', 'popularPosts', 'recommendedPosts'));
     }
 
