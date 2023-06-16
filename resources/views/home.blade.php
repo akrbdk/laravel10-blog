@@ -32,6 +32,9 @@
             <h2 class="text-lg sm:text-xl font-bold text-blue-500 uppercase pb-1 border-b-2 border-blue-500 mb-3">
                 Recommended posts
             </h2>
+            @foreach($recommendedPosts as $post)
+                <x-post-item :post="$post"/>
+            @endforeach
         </div>
 
         <!-- Latest categories -->

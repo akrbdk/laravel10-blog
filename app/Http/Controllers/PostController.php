@@ -42,10 +42,40 @@ class PostController extends Controller
 
         //If authorized - Show recommended posts based on user upvotes
         //If not authorized - Popular posts based on views
+        $user = auth()->user();
+
+        if($user){
+            $leftJoin = '(
+                    SELECT cp.category_id, cp.post_id
+                    FROM upvote_downvotes
+                    JOIN category_post cp ON upvote_downvotes.post_id = cp.post_id
+                    WHERE upvote_downvotes.is_upvote = 1 and upvote_downvotes.user_id = ?
+                ) as t';
+            $recommendedPosts = Post::query()
+                ->leftJoin('category_post as cp', 'posts.id', 'cp.post_id')
+                ->leftJoin(DB::raw($leftJoin), function ($join) {
+                    $join->on('t.category_id', '=', 'cp.category_id')->on('t.post_id', '<>', 'cp.post_id');
+                })
+                ->select('posts.*')
+                ->where('posts.id', '<>', DB::raw('t.post_id'))
+                ->setBindings([$user->id])
+                ->get();
+        } else {
+            $recommendedPosts = Post::query()
+                ->leftJoin('post_views', 'posts.id', 'post_views.post_id')
+                ->select('posts.*', DB::raw('COUNT(post_views.id) as view_count'))
+                ->where('active', '=', 1)
+                ->whereDate('published_at', '<', Carbon::now())
+                ->orderByDesc('view_count')
+                ->groupBy('posts.id')
+                ->limit(5)
+                ->get();
+        }
+
 
         //Show recent categories with their latest posts
 
-        return view('home', compact('latestPost', 'popularPosts'));
+        return view('home', compact('latestPost', 'popularPosts', 'recommendedPosts'));
     }
 
     /**
