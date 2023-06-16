@@ -15,15 +15,18 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index(): View
+    public function home(): View
     {
-        $posts = Post::query()
-            ->where('active', '=', 1)
-            ->whereDate('published_at', '<', Carbon::now())
-            ->orderBy('published_at', 'desc')
-            ->paginate(3);
+        //Latest posts
 
-        return view('home', compact('posts'));
+        //Show the most popular 3 posts based on upvotes
+
+        //If authorized - Show recommended posts based on user upvotes
+        //If not authorized - Popular posts based on views
+
+        //Show recent categories with their latest posts
+
+        return view('home');
     }
 
     /**
