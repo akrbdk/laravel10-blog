@@ -18,6 +18,11 @@ class PostController extends Controller
     public function home(): View
     {
         //Latest posts
+        $latestPost = Post::where('active', '=', 1)
+            ->whereDate('published_at', '<', Carbon::now())
+            ->orderBy('published_at', 'desc')
+            ->limit(1)
+            ->first();
 
         //Show the most popular 3 posts based on upvotes
 
@@ -26,7 +31,7 @@ class PostController extends Controller
 
         //Show recent categories with their latest posts
 
-        return view('home');
+        return view('home', compact('latestPost'));
     }
 
     /**
