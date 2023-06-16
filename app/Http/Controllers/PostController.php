@@ -8,6 +8,7 @@ use App\Models\PostView;
 use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class PostController extends Controller
@@ -25,13 +26,26 @@ class PostController extends Controller
             ->first();
 
         //Show the most popular 3 posts based on upvotes
+        $popularPosts = Post::query()
+            ->leftJoin('upvote_downvotes', 'posts.id', 'upvote_downvotes.post_id')
+            ->select('posts.*', DB::raw('COUNT(upvote_downvotes.id) as upvote_count'))
+            ->where(function ($query) {
+                $query->whereNull('upvote_downvotes.is_upvote')
+                    ->orWhere('upvote_downvotes.is_upvote', '=', 1);
+            })
+            ->where('active', '=', 1)
+            ->whereDate('published_at', '<', Carbon::now())
+            ->orderByDesc('upvote_count')
+            ->groupBy('posts.id')
+            ->limit(3)
+            ->get();
 
         //If authorized - Show recommended posts based on user upvotes
         //If not authorized - Popular posts based on views
 
         //Show recent categories with their latest posts
 
-        return view('home', compact('latestPost'));
+        return view('home', compact('latestPost', 'popularPosts'));
     }
 
     /**
