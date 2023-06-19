@@ -61,6 +61,8 @@
             </div>
         </div>
 
+        <livewire:comments :post="$post" />
+
     </section>
 
 </x-app-layout>
