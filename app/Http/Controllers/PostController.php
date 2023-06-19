@@ -44,7 +44,7 @@ class PostController extends Controller
         //If not authorized - Popular posts based on views
         $user = auth()->user();
 
-        if($user){
+        if ($user) {
             $leftJoin = '(
                     SELECT cp.category_id, cp.post_id
                     FROM upvote_downvotes
@@ -76,14 +76,6 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
@@ -96,7 +88,7 @@ class PostController extends Controller
      */
     public function show(Post $post, Request $request)
     {
-        if(!$post->active || $post->published_at > Carbon::now()){
+        if (!$post->active || $post->published_at > Carbon::now()) {
             throw new NotFoundHttpException();
         }
 
@@ -126,6 +118,14 @@ class PostController extends Controller
         ]);
 
         return view('post.view', compact('post', 'prev', 'next'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
     }
 
     public function byCategory(Category $category)

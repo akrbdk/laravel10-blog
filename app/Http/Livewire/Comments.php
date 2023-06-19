@@ -14,6 +14,7 @@ class Comments extends Component
     {
         $this->post = $post;
     }
+
     public function render()
     {
         $comments = Comment::where('post_id', '=', $this->post->id)->get();

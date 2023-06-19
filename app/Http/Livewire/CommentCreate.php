@@ -16,6 +16,7 @@ class CommentCreate extends Component
     {
         $this->post = $post;
     }
+
     public function render()
     {
         return view('livewire.comment-create');
@@ -25,8 +26,8 @@ class CommentCreate extends Component
     {
         $user = auth()->user();
 
-        if(!$user){
-//            return $this->redirect('/login');
+        if (!$user) {
+            return $this->redirect('/login');
         }
 
         Comment::create([

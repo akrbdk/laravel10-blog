@@ -13,6 +13,7 @@ class CommentItem extends Component
     {
         $this->comment = $comment;
     }
+
     public function render()
     {
         return view('livewire.comment-item');
