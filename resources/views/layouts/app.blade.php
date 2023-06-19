@@ -1,5 +1,5 @@
-
-<!DOCTYPE html>
+@php use App\Models\TextWidget; @endphp
+    <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
@@ -19,7 +19,8 @@
     </style>
 
     <!-- Font Awesome -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js" integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"
+            integrity="sha256-KzZiKy0DWYsnwMF+X1DvQngQ2/FxF7MF3Ff72XcpuPs=" crossorigin="anonymous"></script>
 
     @livewireStyles
 
@@ -32,10 +33,10 @@
 <header class="w-full container mx-auto">
     <div class="flex flex-col items-center py-12">
         <a class="font-bold text-gray-800 uppercase hover:text-gray-700 text-5xl" href="#">
-            {{ \App\Models\TextWidget::getTitle('header') }}
+            {{ TextWidget::getTitle('header') }}
         </a>
         <p class="text-lg text-gray-600">
-            {!! \App\Models\TextWidget::getContent('header') !!}
+            {!! TextWidget::getContent('header') !!}
         </p>
     </div>
 </header>
@@ -44,13 +45,14 @@
 <nav class="w-full py-4 border-t border-b bg-gray-100" x-data="{ open: false }">
     <div class="block sm:hidden">
         <a href="#"
-            class="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
-            @click="open = !open">
+           class="block md:hidden text-base font-bold uppercase text-center flex justify-center items-center"
+           @click="open = !open">
             Topics <i :class="open ? 'fa-chevron-down': 'fa-chevron-up'" class="fas ml-2"></i>
         </a>
     </div>
     <div :class="open ? 'block': 'hidden'" class="w-full flex-grow sm:flex sm:items-center sm:w-auto">
-        <div class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
+        <div
+            class="w-full container mx-auto flex flex-col sm:flex-row items-center justify-center text-sm font-bold uppercase mt-0 px-6 py-2">
 
             <a href="{{ route('home') }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2">
                 Home
@@ -58,7 +60,8 @@
 
             @if(isset($categories))
                 @foreach($categories as $category)
-                    <a href="{{ route('by-category', $category) }}" class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('by-category', $category) }}"
+                       class="hover:bg-gray-400 rounded py-2 px-4 mx-2 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
                         {{ $category->title }}
                     </a>
                 @endforeach
@@ -72,12 +75,16 @@
                 <div class="flex sm:items-center sm:ml-6">
                     <x-dropdown align="right" width="48">
                         <x-slot name="trigger">
-                            <button class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
+                            <button
+                                class="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-gray-500 bg-white hover:text-gray-700 focus:outline-none transition ease-in-out duration-150">
                                 <div>{{ Auth::user()->name }}</div>
 
                                 <div class="ml-1">
-                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
-                                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                                    <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                              d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                                              clip-rule="evenodd"/>
                                     </svg>
                                 </div>
                             </button>
@@ -133,7 +140,8 @@
 
             @if(isset($categories))
                 @foreach($categories as $category)
-                    <a href="{{ route('by-category', $category) }}" class="uppercase px-3 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
+                    <a href="{{ route('by-category', $category) }}"
+                       class="uppercase px-3 {{ request('category')?->slug === $category->slug ? 'bg-blue-600 text-white' : '' }}">
                         {{ $category->title }}
                     </a>
                 @endforeach

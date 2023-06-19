@@ -1,5 +1,5 @@
 <?php
-/** @var $posts \Illuminate\Pagination\LengthAwarePaginator */
+/** @var $posts LengthAwarePaginator */
 ?>
 
 <x-app-layout meta-description="My personal blog page">

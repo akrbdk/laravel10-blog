@@ -9,7 +9,8 @@
             </a>
             <div class="bg-white flex flex-col justify-start p-6">
                 @foreach($post->categories as $category)
-                    <a href="{{ route('by-category', $category) }}" class="text-blue-700 text-sm font-bold uppercase pb-4">
+                    <a href="{{ route('by-category', $category) }}"
+                       class="text-blue-700 text-sm font-bold uppercase pb-4">
                         {{ $category->title }}
                     </a>
                 @endforeach
@@ -36,8 +37,10 @@
         <div class="w-full flex pt-6">
             <div class="w-1/2">
                 @if($prev)
-                    <a href="{{ route('view', $prev) }}" class="block w-full w-1/2 bg-white shadow hover:shadow-md text-left p-6">
-                        <p class="text-lg text-blue-800 font-bold flex items-center"><i class="fas fa-arrow-left pr-1"></i>
+                    <a href="{{ route('view', $prev) }}"
+                       class="block w-full w-1/2 bg-white shadow hover:shadow-md text-left p-6">
+                        <p class="text-lg text-blue-800 font-bold flex items-center"><i
+                                class="fas fa-arrow-left pr-1"></i>
                             Previous
                         </p>
                         <p class="pt-2">
@@ -49,7 +52,8 @@
 
             <div class="w-1/2">
                 @if($next)
-                    <a href="{{ route('view', $next) }}" class="block w-full bg-white shadow hover:shadow-md text-right p-6">
+                    <a href="{{ route('view', $next) }}"
+                       class="block w-full bg-white shadow hover:shadow-md text-right p-6">
                         <p class="text-lg text-blue-800 font-bold flex items-center justify-end">
                             Next <i class="fas fa-arrow-right pl-1"></i>
                         </p>
@@ -61,7 +65,7 @@
             </div>
         </div>
 
-        <livewire:comments :post="$post" />
+        <livewire:comments :post="$post"/>
 
     </section>
 
